@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import './App.css';
 import axios from "axios";
+import Navbar from "./components/Navbar.tsx";
 
 type Entry = {
     id: string;
@@ -82,6 +83,7 @@ function handelStatusChange(id: string, newStatus: string) {
 
 return (
     <>
+        <Navbar/>
         <h1>Diary Entries List</h1>
         <p>Test for Deploy 2</p>
         <p>failcheck</p>
