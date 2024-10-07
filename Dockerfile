@@ -1,8 +1,3 @@
-#FROM ubuntu:latest
-#LABEL authors="ricardo"
-#
-#ENTRYPOINT ["top", "-b"]
-
 FROM --platform=linux/amd64 openjdk:21
 EXPOSE 8080
 ADD backend/target/app.jar app.jar
