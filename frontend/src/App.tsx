@@ -83,9 +83,6 @@ function handelStatusChange(id: string, newStatus: string) {
 return (
     <>
         <h1>Diary Entries List</h1>
-        <p>Test for Deploy 2</p>
-        <p>failcheck</p>
-        {/*das ist ein Test für Sonar*/}
         <ul>
             {entries.map((entry) => (
                 <li key={entry.id}>
