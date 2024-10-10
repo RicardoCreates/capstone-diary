@@ -15,9 +15,13 @@ export default function App() {
 // Get Entries
     useEffect(() => {
         axios.get("/api/diary")
-            .then(response => setEntries(response.data))
+            .then(response => {
+                const data = Array.isArray(response.data) ? response.data : [];
+                setEntries(data);
+            })
             .catch(error => console.log(error));
     }, []);
+
 
 
 // Add Entry
@@ -79,15 +83,29 @@ function handelStatusChange(id: string, newStatus: string) {
     ));
 }
 
+//login
+    function login(){
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin
+        window.open(host+'/oauth2/authorization/github', '_self')
+    }
+
+    function handleMe(){
+        axios.get('/api/auth/me')
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
+
 
 return (
     <>
+        <button onClick={login}>Login</button>
+        <button onClick={handleMe}>Me</button>
         <h1>Diary Entries List</h1>
         <p>Test for Deploy 2</p>
         <p>failcheck</p>
         {/*das ist ein Test für Sonar*/}
         <ul>
-            {entries.map((entry) => (
+            {Array.isArray(entries) && entries.map((entry) => (
                 <li key={entry.id}>
                     <input
                         type="text"
