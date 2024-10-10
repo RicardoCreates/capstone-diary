@@ -95,11 +95,17 @@ function handelStatusChange(id: string, newStatus: string) {
         .catch(error => console.log(error))
     }
 
+    function logout(){
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin
+        window.open(host+'/api/auth/logout', '_self')
+    }
+
 
 return (
     <>
         <button onClick={login}>Login</button>
         <button onClick={handleMe}>Me</button>
+        <button onClick={logout}>Logout</button>
         <h1>Diary Entries List</h1>
         <p>Test for Deploy 2</p>
         <p>failcheck</p>
