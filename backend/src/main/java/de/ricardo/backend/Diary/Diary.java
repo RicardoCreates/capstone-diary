@@ -17,6 +17,5 @@ public record Diary(
         return new Diary(id, description, status);
     }
 
-    // ToDo sonarTest
 
 }

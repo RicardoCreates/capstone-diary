@@ -1,6 +1,8 @@
 package de.ricardo.backend.Diary;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +27,9 @@ public class DiaryService {
     }
 
     public Diary getById(String id) {
-        return diaryRepository.findById(id).orElse(null);
+        return diaryRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Diary entry not found")
+        );
     }
 
     public Diary update(Diary diary) {
@@ -33,6 +37,9 @@ public class DiaryService {
     }
 
     public void delete(String id) {
+        if (!diaryRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Diary entry not found");
+        }
         diaryRepository.deleteById(id);
     }
 }
