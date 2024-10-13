@@ -15,26 +15,24 @@ public class DiaryService {
     }
 
     List<Diary> getAll() {
-        return DiaryRepository.getAll();
+        return diaryRepository.findAll();
     }
 
     public Diary save(Diary diary) {
         String id = UUID.randomUUID().toString();
-
         Diary todoToSave = diary.withId(id);
-
         return diaryRepository.save(todoToSave);
     }
 
     public Diary getById(String id) {
-        return diaryRepository.getById(id);
+        return diaryRepository.findById(id).orElse(null);
     }
 
     public Diary update(Diary diary) {
-        return diaryRepository.update(diary);
+        return diaryRepository.save(diary);
     }
 
     public void delete(String id) {
-        diaryRepository.delete(id);
+        diaryRepository.deleteById(id);
     }
 }
